@@ -6,7 +6,7 @@
 
 Term: Fall 2016
 
-+ [Data link](https://courseworks2.columbia.edu/courses/11849/files/folder/Project_Files?preview=763391)-(**coursework login required**)
++ [Data link](https://courseworks2.columbia.edu/courses/11849/files/folder/Project_Files?preview=763391)-(**courseworks login required**)
 + [Data description](doc/readme.html)
 + Contributor's name:
 + Projec title: Lorem ipsum dolor sit amet
