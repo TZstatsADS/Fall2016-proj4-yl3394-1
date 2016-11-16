@@ -10,7 +10,16 @@ Term: Fall 2016
 + [Data description](doc/readme.html)
 + Contributor's name:
 + Projec title: Lorem ipsum dolor sit amet
-+ Project summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
++ Project summary: I presented/trained three different types of models, in which model #1 is more advanced compared with model#2 and model#3. 
+	(1) Model #1: 5000 Random Forests with 200 trees per RF (ensmble method, voting as ranking)
+	(2) Model #2: distance (similar to recommendation system)
+	(3) Model #3: 5000 Linear Regressions 
+	
+	Model training procedures: PCA (dimension reduced from 46 down to 19, which still explains 90% of variablity of the original feature dataset) + Random Forests on 5000 words (voting system)
+	
+
+
+
 	
 Following [suggestions](http://nicercode.github.io/blog/2013-04-05-projects/) by [RICH FITZJOHN](http://nicercode.github.io/about/#Team) (@richfitz). This folder is orgarnized as follows.
 
