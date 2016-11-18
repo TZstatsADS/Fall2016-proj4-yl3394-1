@@ -80,33 +80,10 @@ getRankbyRF <- function(data){
 }
 # ---------------------------------------------------------------------------------
 
-# Helper Function 002: Get RF predictions -----------------------------------------
-
-
-
-
 
 # Random Forest Model Training ##########################################################################################
 # Get all Random Forest models (4825) 
 RFmodel4825.list <- getRankbyRF(dat.lyrics.none0)
-
-
-
-
-# Test model on "A" ------------------------------------------
-dat.a <-  left_join(data.frame(song_code = dat.lyrics$song_code), 
-                    dat.features.small)
-
-# subset 
-dat.a.sample <- dat.a[sample(1:nrow(dat.a), 100,
-                             replace=FALSE),]
-pred.a <- predict(RFmodel4825.list[[3]], dat.a.sample, type = "prob")
-
-test111 <- as.data.frame(predict(RFmodel4825.list[[3]], dat.a.sample, type = "prob"))
-test111$`1`
-
-
-
 
 
 
