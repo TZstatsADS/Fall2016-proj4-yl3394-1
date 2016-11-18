@@ -87,10 +87,9 @@ getRankbyRF <- function(data){
 
 
 # Random Forest Model Training ##########################################################################################
-# Get all Random Forests (4825) 
+# Get all Random Forest models (4825) 
 RFmodel4825.list <- getRankbyRF(dat.lyrics.none0)
 
-# Random Forest Prediction ##############################################################################################
 
 
 
@@ -132,117 +131,40 @@ dat.features.test.small <- cbind(song_code = dat.features.test$song_code,
 
 
 
-# Make an empty dataframe for probability values 
-dat.empty <- dat.lyrics.none0[1:100,] %>% select(c(2:ncol(dat.lyrics.none0)))
-dat.empty <- ifelse(dat.empty<0, NA, NA)
 
-dat.pred.prob <- as.data.frame(cbind(song_code = dat.features.test$song_code, 
-                                     dat.empty))
 
 # Transform the probability table into a ranking table 
 
 
-test111 <- as.data.frame(predict(RFmodel4825.list[[3]], dat.a.sample, type = "prob"))
-test111$`1`
-
-
+# Random Forest Prediction ##############################################################################################
 # Helper Function 002: Get RF predictions -----------------------------------------
 getPredRankbyRF <- function(model.list, test.data, pred.result) {
+  # @parameter: a RF models list, a test dataset, an empty prediction table 
+  # @value: the filled-out prediction table 
   for (i in (1: length(model.list))){
-    temp.pred <- as.data.frame(predict(RFmodel4825.list[[i]], dat.a.sample, type = "prob"))
+    temp.pred <- as.data.frame(predict(model.list[[i]], test.data, type = "prob"))
     pred.result[, i+1] <- temp.pred$`1`
+    print(i)
   }
+  return(pred.result)
 }
 
 
+# Make an empty dataframe for probability values 
+dat.empty <- dat.lyrics.none0[1:100,] %>% select(c(2:ncol(dat.lyrics.none0)))
+dat.empty <- ifelse(dat.empty<0, NA, NA)
 
+dat.pred.empty <- as.data.frame(cbind(song_code = dat.features.test$song_code, 
+                                     dat.empty))
 
-
-# for (i in (1: length(RFmodel4825.list[1:5]))){
-#   temp.pred <- as.data.frame(predict(RFmodel4825.list[[i]], dat.a.sample, type = "prob"))
-#   print(temp.pred$`1`)
-#   dat.pred.prob[, i+1] <- temp.pred$`1`
-# }
-
-
-# ---------------------------------------------------------------------------------
-
-
-
-
+# Get the prediction results 
+dat.pred.prob <- getPredRankbyRF(RFmodel4825.list, dat.features.test.small, dat.pred.empty)
+# Save as a csv file to local
+write.csv(dat.pred.prob, "exported_data/dat_pred_prob.csv")
 
 
 
 
-
-
-
-
-# TEST  ---------------------------------------------------------------------------
-# TEST 001: test on 1 word
-RFmodel.list <- getRankbyRF(dat.lyrics.none0[,1:2])
-
-# TEST 002: test on 16 words 
-RFmodel.list <- getRankbyRF(dat.lyrics.none0[,1:7])
-
-# ---------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Prediction <- predict(model.a, dat.a.sample)
-
-
-
-# Test on word "Abandon" -------------------------------------
-dat.abandon <-  left_join(test, dat.features.small)
-
-# Test model on "Abandon" 
-model.abandon <- randomForest(as.factor(abandon) ~ . -song_code, 
-                              data = dat.abandon, ntree = 200)
-# Unbalanced model ??????? What we can do with the unbalanced model? 
-
-
-
-
-
-
-model.a <- randomForest(as.factor(a) ~ . -song_code, 
-                        data = dat.a, 
-                        importance = TRUE, # allows us to inspect variable importance 
-                        ntree = 200)
-# Get vote
-vote.a <- as.data.frame(model.a$votes) 
-
-
-
-# Test model on "About" --------------------------------------
-dat.about <-  left_join(data.frame(song_code = dat.lyrics$song_code, 
-                               about = (ifelse(dat.lyrics$about > 0, 1, 0))), dat.features)
-
-model.about <- randomForest(as.factor(about) ~ . -song_code, 
-                        data = dat.about, ntree = 200)
-
-
+# Random Forest Prediction ##############################################################################################
 
 
